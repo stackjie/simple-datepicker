@@ -4,13 +4,71 @@
  */
 
  .ejdate-wrap {
+     display: inline-block;
      position: relative;
  }
 
  .ejdate-main {
-     width: 25em;
+     width: 28em;
+     padding: .5em;
      border: 1px solid #d5d5d5;
      font-size: 62.5%;
      box-shadow: 3px 3px 8px #d5d5d5;
      position: absolute;
+ }
+
+ .ejdate-main table caption {
+     margin-bottom: 15px;
+ }
+
+ .ejdate-main .cut-date{
+     display: inline-block;
+     width: 3em;
+     height: 3em;
+     border: 1px solid #c4c4c4;
+     border-radius: 50%;
+     vertical-align:middle;
+     position: relative;
+     cursor: pointer;
+ }
+
+ .ejdate-main .before-date {
+     margin-right: 2em;
+ }
+
+  .ejdate-main .after-date {
+     margin-left: 2em;
+ }
+
+.ejdate-main .after-date:after, .ejdate-main .after-date:before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    margin: -10px 0 0 -2.5px;
+    border: 10px solid transparent;
+    border-left: 10px solid #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+.ejdate-main .after-date:before {
+    border-left: 10px solid #c4c4c4;
+    margin-left: -1.5px; 
+}
+
+ .ejdate-main select {
+     display: inline-block;
+     width: 6em;
+     height: 2em;
+     border: 1px solid #c4c4c4;
+     border-radius: 10px;
+     vertical-align:middle;
+     outline: none;
+     cursor: pointer;
+ }
+
+  .ejdate-main table {
+      width: 100%;
  }
