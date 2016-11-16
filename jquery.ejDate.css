@@ -9,10 +9,9 @@
  }
 
  .ejdate-main {
-     width: 28em;
-     padding: .5em;
+     width: 280px;
+     padding: 5px;
      border: 1px solid #d5d5d5;
-     font-size: 12px;
      box-shadow: 3px 3px 8px #d5d5d5;
      position: absolute;
  }
@@ -23,13 +22,13 @@
  }
 
  .ejdate-main table caption {
-     margin-top: 10px;
+     margin: 10px 0 10px 0;
  }
 
  .ejdate-main .cut-date{
      display: inline-block;
-     width: 3em;
-     height: 3em;
+     width: 30px;
+     height: 30px;
      border: 1px solid #c4c4c4;
      border-radius: 50%;
      vertical-align:middle;
@@ -40,7 +39,7 @@
  /* 日期向前按钮样式 */
 
  .ejdate-main .before-date {
-     margin-right: 2em;
+     margin-right: 20px;
  }
 
  /* 左箭头 */
@@ -65,7 +64,7 @@
  /* 日期向后按钮样式 */
 
   .ejdate-main .after-date {
-     margin-left: 2em;
+     margin-left: 20px;
  }
 /* 右箭头 */
 .ejdate-main .after-date:after, .ejdate-main .after-date:before {
@@ -88,34 +87,47 @@
 
  .ejdate-main select {
      display: inline-block;
-     width: 6em;
-     height: 2em;
+     width: 65px;
+     height: 28px;
      border: 1px solid #c4c4c4;
-     border-radius: 10px;
+     border-radius: 5px;
      vertical-align:middle;
      outline: none;
      cursor: pointer;
+ }
+
+ .ejdate-main .year-select {
+     margin-right: 10px; 
  }
 
   .ejdate-main table {
       width: 100%;
  }
 
- /*.ejdate-main thead tr {
-     display: block;
-     height: 3em;
- }*/
-
   .ejdate-main thead th {
     display: inline-block;
-    height: 3.5em;
-    width: 3.5em;
-    line-height: 3.5em;
+    height: 35px;
+    width: 35px;
+    line-height: 35px;
+    font-size: 12px;
+    font-weight: normal;
+    cursor: pointer;
  }
 
  .ejdate-main tbody td {
     display: inline-block;
-    height: 3.5em;
-    width: 3.5em;
-    line-height: 3.5em;
+    height: 35px;
+    width: 35px;
+    border-radius: 5px;
+    line-height: 35px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all .3s;
  }
+
+ .ejdate-main tbody td:hover {
+    border-radius: 50%;
+    background: #e74f4d;
+    color: #fff;
+ }
+
