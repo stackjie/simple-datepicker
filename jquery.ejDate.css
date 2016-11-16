@@ -146,6 +146,7 @@
     border-radius: 5px;
     line-height: 35px;
     font-size: 14px;
+    color: #808080;
     cursor: pointer;
     transition: all .3s;
  }
