@@ -12,13 +12,18 @@
      width: 28em;
      padding: .5em;
      border: 1px solid #d5d5d5;
-     font-size: 62.5%;
+     font-size: 12px;
      box-shadow: 3px 3px 8px #d5d5d5;
      position: absolute;
  }
 
+ .ejdate-main table {
+     text-align: center;
+     table-layout: fixed;
+ }
+
  .ejdate-main table caption {
-     margin-bottom: 15px;
+     margin-top: 10px;
  }
 
  .ejdate-main .cut-date{
@@ -32,20 +37,43 @@
      cursor: pointer;
  }
 
+ /* 日期向前按钮样式 */
+
  .ejdate-main .before-date {
      margin-right: 2em;
  }
 
+ /* 左箭头 */
+ .ejdate-main .before-date:after, .ejdate-main .before-date:before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    margin: -10px 0 0 -15px;
+    border: 10px solid transparent;
+    border-right: 10px solid #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+.ejdate-main .before-date:before {
+    border-right: 10px solid #c4c4c4;
+    margin-left: -16px; 
+}
+
+ /* 日期向后按钮样式 */
+
   .ejdate-main .after-date {
      margin-left: 2em;
  }
-
+/* 右箭头 */
 .ejdate-main .after-date:after, .ejdate-main .after-date:before {
     content: "";
     display: block;
     width: 0;
     height: 0;
-    margin: -10px 0 0 -2.5px;
+    margin: -10px 0 0 -5px;
     border: 10px solid transparent;
     border-left: 10px solid #fff;
     position: absolute;
@@ -55,7 +83,7 @@
 
 .ejdate-main .after-date:before {
     border-left: 10px solid #c4c4c4;
-    margin-left: -1.5px; 
+    margin-left: -4px; 
 }
 
  .ejdate-main select {
@@ -71,4 +99,23 @@
 
   .ejdate-main table {
       width: 100%;
+ }
+
+ /*.ejdate-main thead tr {
+     display: block;
+     height: 3em;
+ }*/
+
+  .ejdate-main thead th {
+    display: inline-block;
+    height: 3.5em;
+    width: 3.5em;
+    line-height: 3.5em;
+ }
+
+ .ejdate-main tbody td {
+    display: inline-block;
+    height: 3.5em;
+    width: 3.5em;
+    line-height: 3.5em;
  }
