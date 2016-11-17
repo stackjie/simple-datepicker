@@ -18,5 +18,8 @@
   "homepage": "https://github.com/stackjie/date-component#readme",
   "devDependencies": {
     "gulp": "^3.9.1"
+  },
+  "dependencies": {
+    "jquery": "^3.1.1"
   }
 }
