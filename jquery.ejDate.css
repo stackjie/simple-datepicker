@@ -45,7 +45,7 @@
      margin: 10px 0 10px 0;
  }
 
- .ejdate-main .cut-date{
+ .ejdate-main .btn-cut{
      display: inline-block;
      width: 30px;
      height: 30px;
@@ -58,7 +58,7 @@
  }
 
  /* 切换按钮hover样式 */
-.ejdate-main .cut-date:hover {
+.ejdate-main .btn-cut:hover {
     box-shadow: 3px 3px 8px #d5d5d5;
 }
 
