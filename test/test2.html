@@ -4,15 +4,35 @@
     <meta charset="UTF-8">
     <title>Document</title>
     <link rel="stylesheet" href="../jquery.ejDate.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Microsoft YaHei",Arial,Helvetica,sans-serif; 
+        }
+
+        .wrap {
+            width: 500px;
+            margin: 20px auto;
+        }
+    </style>
 </head>
 <body>
-    <div class="ejdate-wrap" id="test_ejdate">
-        <input type="text">
+    <div class="wrap">
+        <div class="ejdate-wrap" id="test_ejdate">
+            <input type="text">
+        </div>
     </div>
     <script src="jquery.min.js"></script>
     <script src="../jquery.ejDate.js"></script>
     <script>
-        $('#test_ejdate').ejDate();
+        $('#test_ejdate').ejDate({
+            yearULV:2020,
+            yearDLV:1970,
+        });
     </script>
 </body>
 </html>
