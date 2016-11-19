@@ -25,22 +25,16 @@
             // 当前的月
             nowMonth = nowDate.getMonth() + 1,
 
-            // 当月的天数
-            days,
-
-            // 这个月第一天是星期几
-            whatDay,
-
-            // 参数对象
-            paras = {
+            // 默认参数对象
+            defaults = {
                 yearULV: nowDate.getFullYear(),  // 年上限值
                 yearDLV: 1970  // 年下限值                         
             };
 
-        // 将配置对象初始化覆盖参数对象的初始值
+        // 将配置对象初始化覆盖默认参数对象的初始值
         if (cfg !== undefined) {
-            paras.yearULV = cfg.yearULV || paras.yearULV;
-            paras.yearDLV = cfg.yearDLV || paras.yearDLV;
+            defaults.yearULV = cfg.yearULV || defaults.yearULV;
+            defaults.yearDLV = cfg.yearDLV || defaults.yearDLV;
         }
        
         // 私有的方法
@@ -70,6 +64,8 @@
                 // 渲染Select表单
                 initRenderSelect();
 
+                renderDate();
+
 
             },
 
@@ -77,9 +73,8 @@
             initRenderSelect = function () {
                 
                 var option,i;
-                console.log(paras.yearULV + " " +paras.yearDLV);
                 // 循环输出年份option
-                for(i = paras.yearULV; i >= paras.yearDLV; i--){
+                for(i = defaults.yearULV; i >= defaults.yearDLV; i--){
 
                     option = $('<option>' + i + '年</option>').val(i);
 
@@ -109,13 +104,67 @@
             renderDate = function () {
                 
                 // 重置tbody
-                tbody.html('');
+                elems.tbody.html('');
 
+                console.log(createDaysDate(nowDate));
+
+                
+            },
+
+            // 生成月份天数数据数组
+            createDaysDate = function (dateObj) {
+
+                var
+                    // 当月的天数
+                    nowDays = getDays(nowYear,nowMonth),
+                    
+                    // 上个月的天数
+                    lastDays = getDays(nowYear,nowMonth - 1),
+
+                    // 保存这个月第一天是星期几
+                    whatDay = new Date(nowYear,nowMonth - 1,1).getDay(),
+
+                    // 保存上月末尾的天数总和
+                    lastDaysEnd = 6 - (7 - whatDay),
+
+                    // 生成的天数数据数组  
+                    daysArray = [],
+
+                    // 保存上个月末尾天数的起始天数
+                    startLastDaysEnd = lastDays - lastDaysEnd,
+
+                    i;
+
+                    console.log(startLastDaysEnd);
+
+                   // 产生上月末尾的天数
+                   for (i = 0; i < lastDaysEnd; i++) {
+                       daysArray[i] = startLastDaysEnd + i + 1;
+                   }
+
+                   // 产生本月的天数
+                   for (i = 1; i <= nowDays; i++) {
+                       daysArray.push(i);
+                   }
+
+                   // 产生余下的下月天数
+                   for (i = 1; daysArray.length < 42; i++) {
+                       daysArray.push(i);
+                   }
+
+                   return daysArray;
+                    
+            },
+
+            // 获取某个月共有几天
+            getDays = function (year,month) {
+                
+                var days;
                 // 当月份为二月时，根据闰年还是非闰年判断天数
-                if (nowMonth === 2) {
+                if (month === 2) {
                     days = year % 4 === 0 ? 29 : 28;
 
-                } else if (nowMonth === 1 || nowMonth === 3 || nowMonth === 5 || nowMonth === 7 || nowMonth === 8 || nowMonth === 10 || nowMonth === 12) {
+                } else if (month === 1 || month === 3 || month === 5 || month === 7 || month === 8 || month === 10 || month === 12) {
                     // 月份为：1,3,5,7,8,10,12 时，为大月.则天数为31；
                     days = 31;
                 }
@@ -125,12 +174,7 @@
 
                 }
 
-                
-            },
-
-            // 生成月份数据数组
-            createMonthDate = function (dateObj) {
-
+                return days;
             },
 
             // 更新Selec表单选中项
