@@ -47,9 +47,9 @@
                         <span class="btn-cut before-date"></span>\
                         <select class="select-year"></select>\
                         <select class="select-month"></select>\
-                        <span class="btn-cut after-date"></span>\
+                        <span class="btn-cut after-date"></span></caption>\
                         <thead><tr><th>一</th><th>二</th><th>三</th><th>四</th><th>五</th><th>六</th><th>七</th></tr></thead>\
-                        <tbody></tbody><caption></table>'
+                        <tbody></tbody></table>'
                 );
 
                 that.append(mainElem);
@@ -106,13 +106,41 @@
                 // 重置tbody
                 elems.tbody.html('');
 
-                console.log(createDaysDate(nowDate));
+                var 
+                    nowDaysData = createDaysData(nowDate),
+                    tr,td,i,j,dateText;
 
-                
+                // 初始化第一行tr
+                tr = $('<tr></tr>');
+                for (i = 0; i < nowDaysData.length; i++) {
+
+                    dateText = nowDaysData[i].substring(nowDaysData[i].indexOf('-') + 1);
+                    td = $('<td></td>').html(dateText);
+                    tr.append(td);
+
+                    // 添加class做不同日期的样式区分
+                    if (nowDaysData[i].indexOf('not') !== -1) {
+                        td.addClass('day-not');
+                    }else {
+                        td.addClass('day-normal');
+                    }
+
+                    // 如果当前循环到的日期能被7整除(一个星期)并且又不是最后一个日期就换行
+                    if ( (i + 1) % 7 === 0) {
+                        elems.tbody.append(tr);
+
+                        // 只要不是最后一个日期就重置tr
+                        if (i !== 41) {
+                            tr = $('<tr></tr>');
+                        }
+                    }
+                    
+                }
+
             },
 
             // 生成月份天数数据数组
-            createDaysDate = function (dateObj) {
+            createDaysData = function (dateObj) {
 
                 var
                     // 当月的天数
@@ -135,24 +163,26 @@
 
                     i;
 
-                    console.log(startLastDaysEnd);
 
-                   // 产生上月末尾的天数
-                   for (i = 0; i < lastDaysEnd; i++) {
-                       daysArray[i] = startLastDaysEnd + i + 1;
-                   }
+                // 产生上月末尾的天数
+                // 日期数据格式  ['not-28',not-29,...,'normal-1','normal-2',...,'not-1','not-2']
+                // 末尾会添加对应的标识以便渲染时应用不同的class样式区分
+                // not: 表示上月以及下月不可用的日期  normal: 当月的日期
+                for (i = 0; i < lastDaysEnd; i++) {
+                    daysArray[i] ='not-' + (startLastDaysEnd + i + 1);
+                }
 
-                   // 产生本月的天数
-                   for (i = 1; i <= nowDays; i++) {
-                       daysArray.push(i);
-                   }
+                // 产生本月的天数
+                for (i = 1; i <= nowDays; i++) {
+                    daysArray.push('normal-' + i);
+                }
 
-                   // 产生余下的下月天数
-                   for (i = 1; daysArray.length < 42; i++) {
-                       daysArray.push(i);
-                   }
+                // 产生余下的下月天数
+                for (i = 1; daysArray.length < 42; i++) {
+                    daysArray.push('not-' + i);
+                }
 
-                   return daysArray;
+                return daysArray;
                     
             },
 

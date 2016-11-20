@@ -146,14 +146,24 @@
     border-radius: 5px;
     line-height: 35px;
     font-size: 14px;
-    color: #808080;
     cursor: pointer;
-    transition: all .3s;
  }
 
- .ejdate-main tbody td:hover {
+/* 天数的几种样式区分 */
+
+/* 表示这个月的天数正常样式 */
+.ejdate-main .day-normal {
+    color: #808080;
+    transition: all .3s;
+}
+
+.ejdate-main .day-normal:hover {
     border-radius: 50%;
     background: #e74f4d;
     color: #fff;
- }
+}
 
+/* 区分上月以及下月日期的样式 */
+.ejdate-main .day-not {
+    color: #ccc;
+}
