@@ -66,7 +66,18 @@
 
                 renderDate();
 
+                // 初始化表单绑定事件
+                elems.btnBefore.click(function(){
+                    // 调用setNowDate函数并传入新的Date对象（当前月份-1）
+                    setNowDate(new Date(nowYear,nowMonth - 1 - 1));
+                    updateSelected();
+                });
 
+                 elems.btnAfterDate.click(function(){
+                    // 调用setNowDate函数并传入新的Date对象（当前月份-1）
+                    setNowDate(new Date(nowYear,nowMonth - 1 + 1));
+                    updateSelected();
+                });
             },
 
             // 初始化渲染Select表单
@@ -104,7 +115,7 @@
             renderDate = function () {
                 
                 // 重置tbody
-                elems.tbody.html('');
+                elems.tbody.hide().html('');
 
                 var 
                     nowDaysData = createDaysData(nowDate),
@@ -137,6 +148,26 @@
                     
                 }
 
+                // 淡入效果
+                elems.tbody.fadeIn();
+            },
+
+            // 设置当前时间对象并渲染
+            setNowDate = function (parNowDate) {
+                 
+                 var tempYear = parNowDate.getFullYear();
+
+                // 如果新传入的nowDate对象年份大于指定的上限值或小于指定的下限值该函数不执行
+                if (tempYear > defaults.yearULV || tempYear < defaults.yearDLV) {
+                    return false;
+                }
+
+                nowDate = parNowDate;
+                nowYear = tempYear;
+                nowMonth = nowDate.getMonth() + 1;
+
+                // 调用渲染函数
+                renderDate();
             },
 
             // 生成月份天数数据数组
@@ -211,13 +242,13 @@
             updateSelected = function () {
 
                 elems.selectYear.find('option').each(function(){
-                    if($(this).text() == year + '年'){
+                    if($(this).text() == nowYear + '年'){
                         $(this)[0].selected = true;
                     }
                 });
 
                 elems.selectMonth.find('option').each(function(){
-                    if($(this).text() == month + '月'){
+                    if($(this).text() == nowMonth + '月'){
                         $(this)[0].selected = true;
                     }
                 });

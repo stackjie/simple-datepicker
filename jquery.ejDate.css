@@ -43,15 +43,15 @@
 
  .ejdate-main table caption {
      margin: 10px 0 10px 0;
+     overflow: hidden;
  }
 
  .ejdate-main .btn-cut{
-     display: inline-block;
-     width: 30px;
-     height: 30px;
+     display: block;
+     width: 28px;
+     height: 28px;
      border: 1px solid #c4c4c4;
      border-radius: 50%;
-     vertical-align:middle;
      position: relative;
      cursor: pointer;
      transition: box-shadow .2s;
@@ -64,7 +64,8 @@
 
  /* 日期向前按钮样式 */
  .ejdate-main .before-date {
-     margin-right: 20px;
+     float: left;
+     margin-left: 10px; 
  }
 
     /* 左箭头 */
@@ -88,7 +89,8 @@
 
  /* 日期向后按钮样式 */
 .ejdate-main .after-date {
-     margin-left: 20px;
+     float: right;
+     margin-right: 10px; 
  }
 
     /* 右箭头 */
@@ -113,7 +115,7 @@
  .ejdate-main select {
      display: inline-block;
      width: 65px;
-     height: 28px;
+     height: 30px;
      border: 1px solid #c4c4c4;
      border-radius: 5px;
      vertical-align:middle;
@@ -121,8 +123,8 @@
      cursor: pointer;
  }
 
- .ejdate-main .year-select {
-     margin-right: 10px; 
+ .ejdate-main .select-year {
+     margin-right: 5px; 
  }
 
   .ejdate-main table {
