@@ -78,6 +78,15 @@
                     setNowDate(new Date(nowYear,nowMonth - 1 + 1));
                     updateSelected();
                 });
+
+                 // 绑定select的change事件
+                elems.selectYear.change(function () {
+                    setNowDate(new Date(this.value,nowMonth - 1));
+                });
+
+                elems.selectMonth.change(function () {
+                    setNowDate(new Date(nowYear,this.value - 1));
+                });
             },
 
             // 初始化渲染Select表单
@@ -115,7 +124,7 @@
             renderDate = function () {
                 
                 // 重置tbody
-                elems.tbody.hide().html('');
+                elems.tbody.html('').css('opacity','0');
 
                 var 
                     nowDaysData = createDaysData(nowDate),
@@ -149,7 +158,7 @@
                 }
 
                 // 淡入效果
-                elems.tbody.fadeIn();
+                elems.tbody.fadeTo('normal','1','linear');
             },
 
             // 设置当前时间对象并渲染
