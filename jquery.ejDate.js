@@ -25,6 +25,9 @@
             // 当前的月
             nowMonth = nowDate.getMonth() + 1,
 
+            // 被选中的日期
+            checkedDate,
+
             // 默认参数对象
             defaults = {
                 yearULV: nowDate.getFullYear(),  // 年上限值
@@ -55,6 +58,7 @@
                 that.append(mainElem);
 
                 // 获取将要操作的dom元素
+                elems.targetInput = mainElem.prev();
                 elems.selectYear = mainElem.find('.select-year'),
                 elems.selectMonth = mainElem.find('.select-month'),
                 elems.btnBefore = mainElem.find('.before-date'),
@@ -86,6 +90,25 @@
 
                 elems.selectMonth.change(function () {
                     setNowDate(new Date(nowYear,this.value - 1));
+                });
+
+                // 日期选中事件委托
+                elems.tbody.on('click','.day-normal',function(ev){
+
+                    that.setDate(nowYear,nowMonth,$(this).html());
+
+                    $(this).addClass('active');
+
+                    // 将日期写入text表单
+                    var dateStr = nowYear + '-' + nowMonth + '-' + $(this).html();
+                    elems.targetInput.val(dateStr);
+
+                    // 执行当用户选择日期后的回调处理函数
+                    // if (typeof checkedDateFunc === 'function') {
+                    //     checkedDateFunc();
+                    // }
+                    
+
                 });
             },
 
@@ -270,9 +293,12 @@
 
             },
 
-            setDate: function () {
+            setDate: function (parYear,parMonth,parDay) {
+                // 清空已被选中日期的选中样式
+                elems.tbody.find('.active').removeClass('active');
 
-            }
+                checkedDate = new Date(parYear,parMonth - 1,parDay);
+            },
         });
 
         // 执行初始化函数

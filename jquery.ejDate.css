@@ -169,3 +169,10 @@
 .ejdate-main .day-not {
     color: #ccc;
 }
+
+/* 被选中 */
+.ejdate-main .active {
+    border-radius: 50%;
+    background: #e74f4d;
+    color: #fff;
+}
