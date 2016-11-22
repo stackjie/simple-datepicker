@@ -161,15 +161,16 @@
                     td = $('<td></td>').html(dateText);
                     tr.append(td);
 
+                    var flag = daysData[i].indexOf('not') === -1;
                     // 添加class做不同日期的样式区分
-                    if (daysData[i].indexOf('not') !== -1) {
-                        td.addClass('day-not');
-                    }else {
+                    if (flag) {
                         td.addClass('day-normal');
+                    }else {
+                        td.addClass('day-not');
                     }
 
                     // 判断当前渲染的天数是不是被选中的天数
-                    if (isCheckedDate(dateText)) {
+                    if (isCheckedDate(dateText) && flag) {
                         td.addClass('active');
                     }
 
