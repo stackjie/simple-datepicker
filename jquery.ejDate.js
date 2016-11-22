@@ -31,15 +31,14 @@
             // 默认参数对象
             defaults = {
                 yearULV: nowDate.getFullYear(),  // 年上限值
-                yearDLV: 1970,  // 年下限值         
-                disabledDate: false  //禁用的日期                  
+                yearDLV: 1970,  // 年下限值                           
             };
 
         // 将配置对象初始化覆盖默认参数对象的初始值
         if (cfg !== undefined) {
             defaults.yearULV = cfg.yearULV || defaults.yearULV;
             defaults.yearDLV = cfg.yearDLV || defaults.yearDLV;
-            defaults.disabledDate = cfg.disabledDate || defaults.disabledDate;
+            defaults.disabledDateReg = cfg.disabledDateReg || defaults.disabledDateReg;
         }
        
         // 私有的方法
@@ -297,27 +296,25 @@
 
             // 判断日期是否被禁用
             isDisabledDate = function (day) {
-                var flag = false;
-
-                if (typeof defaults.disabledDate === 'object') {
-                    if (defaults.disabledDate.year == nowYear) {
-                        flag = true;
-                        if (defaults.disabledDate.month == nowMonth) {
-                            flag = true;
-                             if (defaults.disabledDate.day == day) {
-                                flag = true;
-                            } else if (defaults.disabledDate.day != null && defaults.disabledDate.day != day) {
-                                flag = false;
-                            }
-                        } else if (defaults.disabledDate.month != null && defaults.disabledDate.month != nowMonth) {
-                            flag = false;
-                        }
-                    } else if (defaults.disabledDate.year != null && defaults.disabledDate.year != nowYear) {
+                if (defaults.disabledDateReg) {
+                    var 
+                        yearStr = nowYear + 'y',
+                        monthStr = nowMonth + 'm',
+                        dayStr = day + 'd',
+                        flag = false, 
+                        flagYear,flagMonth,flagDay;
+                    flagYear = defaults.disabledDateReg.test(yearStr);
+                    flagMonth = defaults.disabledDateReg.test(monthStr);
+                    flagDay = defaults.disabledDateReg.test(dayStr);
+                    if (flagYear && flagMonth) {
+                        flag = 
+                    }else {
                         flag = false;
                     }
+
+                    return flag;
                 }
 
-                return flag;
             },
 
             // 判断是否是被选中的日期
