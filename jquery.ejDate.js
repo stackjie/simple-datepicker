@@ -31,13 +31,15 @@
             // 默认参数对象
             defaults = {
                 yearULV: nowDate.getFullYear(),  // 年上限值
-                yearDLV: 1970  // 年下限值                         
+                yearDLV: 1970,  // 年下限值         
+                disabledDate: false  //禁用的日期                  
             };
 
         // 将配置对象初始化覆盖默认参数对象的初始值
         if (cfg !== undefined) {
             defaults.yearULV = cfg.yearULV || defaults.yearULV;
             defaults.yearDLV = cfg.yearDLV || defaults.yearDLV;
+            defaults.disabledDate = cfg.disabledDate || defaults.disabledDate;
         }
        
         // 私有的方法
@@ -161,16 +163,17 @@
                     td = $('<td></td>').html(dateText);
                     tr.append(td);
 
-                    var flag = daysData[i].indexOf('not') === -1;
+                    var isDimmed = daysData[i].indexOf('dimmed') !== -1;
+
                     // 添加class做不同日期的样式区分
-                    if (flag) {
-                        td.addClass('day-normal');
+                    if (isDimmed || isDisabledDate(dateText)) {
+                        td.addClass('day-dimmed');
                     }else {
-                        td.addClass('day-not');
+                        td.addClass('day-normal');
                     }
 
                     // 判断当前渲染的天数是不是被选中的天数
-                    if (isCheckedDate(dateText) && flag) {
+                    if (isCheckedDate(dateText) && !isDimmed) {
                         td.addClass('active');
                     }
 
@@ -234,11 +237,11 @@
 
 
                 // 产生上月末尾的天数
-                // 日期数据格式  ['not-28',not-29,...,'normal-1','normal-2',...,'not-1','not-2']
+                // 日期数据格式  ['dimmed-28',dimmed-29,...,'normal-1','normal-2',...,'dimmed-1','dimmed-2']
                 // 末尾会添加对应的标识以便渲染时应用不同的class样式区分
-                // not: 表示上月以及下月不可用的日期  normal: 当月的日期
+                // dimmed: 表示上月以及下月不可用的日期  normal: 当月的日期
                 for (i = 0; i < lastDaysEnd; i++) {
-                    daysArray[i] ='not-' + (startLastDaysEnd + i + 1);
+                    daysArray[i] ='dimmed-' + (startLastDaysEnd + i + 1);
                 }
 
                 // 产生本月的天数
@@ -248,7 +251,7 @@
 
                 // 产生余下的下月天数
                 for (i = 1; daysArray.length < 42; i++) {
-                    daysArray.push('not-' + i);
+                    daysArray.push('dimmed-' + i);
                 }
 
                 return daysArray;
@@ -292,9 +295,33 @@
                 });
             },
 
+            // 判断日期是否被禁用
+            isDisabledDate = function (day) {
+                var flag = false;
+
+                if (typeof defaults.disabledDate === 'object') {
+                    if (defaults.disabledDate.year == nowYear) {
+                        flag = true;
+                        if (defaults.disabledDate.month == nowMonth) {
+                            flag = true;
+                             if (defaults.disabledDate.day == day) {
+                                flag = true;
+                            } else if (defaults.disabledDate.day != null && defaults.disabledDate.day != day) {
+                                flag = false;
+                            }
+                        } else if (defaults.disabledDate.month != null && defaults.disabledDate.month != nowMonth) {
+                            flag = false;
+                        }
+                    } else if (defaults.disabledDate.year != null && defaults.disabledDate.year != nowYear) {
+                        flag = false;
+                    }
+                }
+
+                return flag;
+            },
+
             // 判断是否是被选中的日期
             isCheckedDate = function (day) {
-            
             if (checkedDate) {
                 var 
                     flagYear = checkedDate.getFullYear() === nowYear,

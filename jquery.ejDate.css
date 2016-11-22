@@ -166,7 +166,7 @@
 }
 
 /* 区分上月以及下月日期的样式 */
-.ejdate-main .day-not {
+.ejdate-main .day-dimmed {
     color: #ccc;
 }
 
