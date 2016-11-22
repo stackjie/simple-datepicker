@@ -150,22 +150,27 @@
                 elems.tbody.html('').css('opacity','0');
 
                 var 
-                    nowDaysData = createDaysData(nowDate),
+                    daysData = createDaysData(nowDate),
                     tr,td,i,j,dateText;
 
                 // 初始化第一行tr
                 tr = $('<tr></tr>');
-                for (i = 0; i < nowDaysData.length; i++) {
+                for (i = 0; i < daysData.length; i++) {
 
-                    dateText = nowDaysData[i].substring(nowDaysData[i].indexOf('-') + 1);
+                    dateText = daysData[i].substring(daysData[i].indexOf('-') + 1);
                     td = $('<td></td>').html(dateText);
                     tr.append(td);
 
                     // 添加class做不同日期的样式区分
-                    if (nowDaysData[i].indexOf('not') !== -1) {
+                    if (daysData[i].indexOf('not') !== -1) {
                         td.addClass('day-not');
                     }else {
                         td.addClass('day-normal');
+                    }
+
+                    // 判断当前渲染的天数是不是被选中的天数
+                    if (isCheckedDate(dateText)) {
+                        td.addClass('active');
                     }
 
                     // 如果当前循环到的日期能被7整除(一个星期)并且又不是最后一个日期就换行
@@ -284,7 +289,21 @@
                         $(this)[0].selected = true;
                     }
                 });
-            };
+            },
+
+            // 判断是否是被选中的日期
+            isCheckedDate = function (day) {
+            
+            if (checkedDate) {
+                var 
+                    flagYear = checkedDate.getFullYear() === nowYear,
+                    flagMonth = checkedDate.getMonth() + 1 === nowMonth,
+                    flagDay = checkedDate.getDate() == day,
+                    flag = flagYear && flagMonth && flagDay;
+                
+                return flag;
+            }
+        };
 
         // 对外提供的api
         $.extend(this, {
