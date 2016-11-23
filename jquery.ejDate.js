@@ -297,21 +297,22 @@
             // 判断日期是否被禁用
             isDisabledDate = function (day) {
                 if (defaults.disabledDateReg) {
-                    var 
-                        yearStr = nowYear + 'y',
-                        monthStr = nowMonth + 'm',
-                        dayStr = day + 'd',
-                        flag = false, 
-                        flagYear,flagMonth,flagDay;
-                    flagYear = defaults.disabledDateReg.test(yearStr);
-                    flagMonth = defaults.disabledDateReg.test(monthStr);
-                    flagDay = defaults.disabledDateReg.test(dayStr);
-                    if (flagYear && flagMonth) {
-                        flag = 
-                    }else {
-                        flag = false;
-                    }
-
+                    // var 
+                    //     yearStr = nowYear + 'y',
+                    //     monthStr = nowMonth + 'm',
+                    //     dayStr = day + 'd',
+                    //     flag = false, 
+                    //     flagYear,flagMonth,flagDay;
+                    // flagYear = defaults.disabledDateReg.test(yearStr);
+                    // flagMonth = defaults.disabledDateReg.test(monthStr);
+                    // flagDay = defaults.disabledDateReg.test(dayStr);
+                    // if (flagYear && flagMonth) {
+                      
+                    // }else {
+                    //     flag = false;
+                    // }
+                    var dateStr = nowYear + 'y' + nowMonth + 'm' + day + 'd',flag;
+                    flag = defaults.disabledDateReg.test(dateStr);
                     return flag;
                 }
 
