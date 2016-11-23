@@ -1,6 +1,9 @@
 /*!
- * ejDate 1.0.0
+ * ejDate 1.0.0 alpha
  * https://github.com/stackjie/ejDate.js
+ * @license MIT licensed
+ *
+ * A project by StackJIE
  */
 
  .ejdate-wrap {
@@ -39,6 +42,7 @@
  .ejdate-main table {
      text-align: center;
      table-layout: fixed;
+     overflow: hidden;
  }
 
  .ejdate-main table caption {
@@ -145,22 +149,22 @@
     display: inline-block;
     height: 35px;
     width: 35px;
-    border-radius: 5px;
+    border-radius: 50%;
     line-height: 35px;
     font-size: 14px;
     cursor: pointer;
  }
+
 
 /* 天数的几种样式区分 */
 
 /* 表示这个月的天数正常样式 */
 .ejdate-main .day-normal {
     color: #808080;
-    transition: all .3s;
+    transition: background .3s;
 }
 
 .ejdate-main .day-normal:hover {
-    border-radius: 50%;
     background: #e74f4d;
     color: #fff;
 }

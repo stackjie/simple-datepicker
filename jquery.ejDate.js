@@ -1,9 +1,12 @@
 /*!
- * ejDate 1.0.0
+ * ejDate 1.0.0 alpha
  * https://github.com/stackjie/ejDate.js
+ * @license MIT licensed
+ *
+ * A project by StackJIE
  */
 
-(function (window, $, undefined) {
+(function ($) {
     'use strict';
 
     $.fn.ejDate = function (cfg) {
@@ -35,7 +38,7 @@
             };
 
         // 将配置对象初始化覆盖默认参数对象的初始值
-        if (cfg !== undefined) {
+        if (typeof cfg !== 'undefined') {
             defaults.yearULV = cfg.yearULV || defaults.yearULV;
             defaults.yearDLV = cfg.yearDLV || defaults.yearDLV;
             defaults.disabledDateReg = cfg.disabledDateReg || defaults.disabledDateReg;  // 筛选禁用日期的正则表达式
@@ -47,7 +50,7 @@
             init = function () {
                 
                 // 生成dom节点
-                var mainElem = $('<div class="ejdate-main">').html(
+                elems.mainElem = $('<div class="ejdate-main">').html(
                     '<table><caption>\
                         <span class="btn-cut before-date"></span>\
                         <select class="select-year"></select>\
@@ -57,15 +60,18 @@
                         <tbody></tbody></table>'
                 );
 
-                that.append(mainElem);
+                that.append(elems.mainElem);
 
                 // 获取将要操作的dom元素
-                elems.targetInput = mainElem.prev();
-                elems.selectYear = mainElem.find('.select-year'),
-                elems.selectMonth = mainElem.find('.select-month'),
-                elems.btnBefore = mainElem.find('.before-date'),
-                elems.btnAfterDate = mainElem.find('.after-date'),
-                elems.tbody = mainElem.find('table tbody');
+                elems.targetInput = elems.mainElem.prev();
+                elems.selectYear = elems.mainElem.find('.select-year'),
+                elems.selectMonth = elems.mainElem.find('.select-month'),
+                elems.btnBefore = elems.mainElem.find('.before-date'),
+                elems.btnAfterDate = elems.mainElem.find('.after-date'),
+                elems.tbody = elems.mainElem.find('table tbody');
+
+                // 将目标text表单设置为只读状态
+                elems.targetInput.attr('readonly','readonly');
 
                 // 渲染Select表单
                 initRenderSelect();
@@ -109,9 +115,27 @@
                     if (typeof defaults.checkedDateFunc === 'function') {
                         defaults.checkedDateFunc(checkedDate);
                     }
-                    
 
+                    // 选择好日期后主体元素默认隐藏
+                    elems.mainElem.hide();
                 });
+
+                // 点击目标表单显示，点击组件主体以外隐藏
+                elems.targetInput.click(function(ev){
+                    elems.mainElem.show();
+                    ev.stopPropagation();
+                });
+
+                $(document).click(function(){
+                    elems.mainElem.hide();
+                });
+
+                elems.mainElem.click(function(ev){
+                    ev.stopPropagation();
+                });
+
+                // 主体元素默认隐藏
+                elems.mainElem.hide();
             },
 
             // 初始化渲染Select表单
@@ -149,7 +173,7 @@
             renderDate = function () {
                 
                 // 重置tbody
-                elems.tbody.html('').css('opacity','0');
+                elems.tbody.html('');
 
                 var 
                     daysData = createDaysData(nowDate),
@@ -188,9 +212,7 @@
                     }
                     
                 }
-
-                // 淡入效果
-                elems.tbody.fadeTo('normal','1','linear');
+ 
             },
 
             // 设置当前时间对象并渲染
@@ -321,10 +343,20 @@
         // 对外提供的api
         $.extend(this, {
             
+            /**
+             * 获取选中的日期
+             * @return {object}
+             */
             getDate: function () {
-
+                return checkedDate;
             },
 
+            /**
+             * 设置选中的日期
+             * @param {int} parYear  年
+             * @param {int} parMonth 月
+             * @param {int} parDay   日
+             */
             setDate: function (parYear,parMonth,parDay) {
                 // 清空已被选中日期的选中样式
                 elems.tbody.find('.active').removeClass('active');
@@ -339,4 +371,4 @@
         return this;
     }
 
-})(window, jQuery);
+})(jQuery);
