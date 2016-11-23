@@ -32,7 +32,10 @@
         $('#test_ejdate').ejDate({
             yearULV:2020,
             yearDLV:1970,
-            disabledDateReg:/2016y10m{1,2}/,  //筛选不可选日期的正则
+            disabledDateReg:/2016y10m((11d)|(15d))/,  //筛选不可选日期的正则
+            checkedDateFunc:function(date){
+                alert(date);
+            }
         });
     </script>
 </body>

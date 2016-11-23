@@ -38,7 +38,8 @@
         if (cfg !== undefined) {
             defaults.yearULV = cfg.yearULV || defaults.yearULV;
             defaults.yearDLV = cfg.yearDLV || defaults.yearDLV;
-            defaults.disabledDateReg = cfg.disabledDateReg || defaults.disabledDateReg;
+            defaults.disabledDateReg = cfg.disabledDateReg || defaults.disabledDateReg;  // 筛选禁用日期的正则表达式
+            defaults.checkedDateFunc = cfg.checkedDateFunc || defaults.checkedDateFunc;  // 选日期后调用的回调方法
         }
        
         // 私有的方法
@@ -105,9 +106,9 @@
                     elems.targetInput.val(dateStr);
 
                     // 执行当用户选择日期后的回调处理函数
-                    // if (typeof checkedDateFunc === 'function') {
-                    //     checkedDateFunc();
-                    // }
+                    if (typeof defaults.checkedDateFunc === 'function') {
+                        defaults.checkedDateFunc(checkedDate);
+                    }
                     
 
                 });
@@ -297,20 +298,6 @@
             // 判断日期是否被禁用
             isDisabledDate = function (day) {
                 if (defaults.disabledDateReg) {
-                    // var 
-                    //     yearStr = nowYear + 'y',
-                    //     monthStr = nowMonth + 'm',
-                    //     dayStr = day + 'd',
-                    //     flag = false, 
-                    //     flagYear,flagMonth,flagDay;
-                    // flagYear = defaults.disabledDateReg.test(yearStr);
-                    // flagMonth = defaults.disabledDateReg.test(monthStr);
-                    // flagDay = defaults.disabledDateReg.test(dayStr);
-                    // if (flagYear && flagMonth) {
-                      
-                    // }else {
-                    //     flag = false;
-                    // }
                     var dateStr = nowYear + 'y' + nowMonth + 'm' + day + 'd',flag;
                     flag = defaults.disabledDateReg.test(dateStr);
                     return flag;
@@ -348,6 +335,8 @@
 
         // 执行初始化函数
         init();
+
+        return this;
     }
 
 })(window, jQuery);
