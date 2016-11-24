@@ -161,7 +161,7 @@
 /* 表示这个月的天数正常样式 */
 .ejdate-main .day-normal {
     color: #808080;
-    transition: background .3s;
+    transition: background .4s;
 }
 
 .ejdate-main .day-normal:hover {

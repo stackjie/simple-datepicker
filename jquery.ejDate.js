@@ -362,7 +362,7 @@
                 elems.tbody.find('.active').removeClass('active');
 
                 checkedDate = new Date(parYear,parMonth - 1,parDay);
-            },
+            }
         });
 
         // 执行初始化函数

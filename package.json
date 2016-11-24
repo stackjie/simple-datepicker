@@ -17,7 +17,10 @@
   },
   "homepage": "https://github.com/stackjie/date-component#readme",
   "devDependencies": {
-    "gulp": "^3.9.1"
+    "gulp": "^3.9.1",
+    "gulp-csso": "^2.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^2.0.0"
   },
   "dependencies": {
     "jquery": "^3.1.1"
