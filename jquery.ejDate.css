@@ -118,10 +118,11 @@
 
  .ejdate-main select {
      display: inline-block;
-     width: 65px;
+     width: 70px;
      height: 30px;
      border: 1px solid #c4c4c4;
      border-radius: 5px;
+     font-size: 16px;
      vertical-align:middle;
      outline: none;
      cursor: pointer;

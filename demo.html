@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>ejDate-Demo</title>
+    <link rel="stylesheet" href="dist/jquery.ejDate.min.css">
+    <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+    <script src="dist/jquery.ejDate.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Microsoft YaHei",Arial,Helvetica,sans-serif; 
+        }
+
+        .wrap {
+            width: 500px;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        input[type="text"] {
+            display: block;
+            width: 100%;
+            height: 20px;
+            padding: 6px 12px;
+            font-size: 14px;
+            line-height: 1.42857143;
+            color: #555;
+            background-color: #fff;
+            background-image: none;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+            -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+            -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+            transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="ejdate-wrap" id="demo_ejdate">
+            <input type="text">
+        </div>
+    </div>
+    <script>
+        $('#demo_ejdate').ejDate({
+            yearULV:2020,  // 设置年份的上限值
+            yearDLV:1970,  // 设置年份的下限值
+            disabledDateReg:/2016y10m((11d)|(15d))/,  //筛选不可选日期的正则
+            checkedDateFunc:function(date){  // 选中日期后执行的回调函数
+               console.log(date);
+            }
+        });
+    </script>
+</body>
+</html>
