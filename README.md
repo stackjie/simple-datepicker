@@ -32,7 +32,7 @@ $('#demo_ejdate').ejDate({
 `2016y6m6d`正则表达式需要根据该格式的字符串来编写，y代表年，m为月d为日。
 在ejDate.js生成日期时都会生成这么一个对应的字符串，根据你传入的正则表达式来匹配该字符串，如果能匹配，字符串对应的日期将会被禁用。
 ####checkedDateFunc
-选中日期后执行的回调函数，可以接受date参数，date参数为选中的日期，是一个JavaScript原生日期对象
+选中日期后执行的回调函数，可以接收date参数，date参数为选中的日期，是一个JavaScript原生日期对象
 ###API
 执行ejDate()构造函数后会返回一个ejDate对象，ejDate对象提供了一些简单的api
 ####getDate()
