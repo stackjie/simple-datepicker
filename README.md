@@ -4,13 +4,10 @@
 ##如何使用
 ejDate.js依赖jquery，必须先引入jquery，并将本项目下的dist文件夹内的jquery.ejDate.min.css和jquery.ejDate.min.js引入。
 ###初始化
-首先将需要应用的text表单放入一个class为`ejdate-wrap`的div容器中，并赋予id属性。
 ```html
-<div class="ejdate-wrap" id="demo_ejdate">
-    <input type="text">
-</div>
+<input type="text" id="demo_ejdate">
 ```
-使用jquery选择器获取到div容器后执行ejDate()构造函数并传入配置参数。
+使用jquery选择器获取到text表单后执行ejDate()构造函数并传入配置参数。
 ```javascript
 $('#demo_ejdate').ejDate({
     yearULV:2020,  // 设置年份的上限值
