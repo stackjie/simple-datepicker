@@ -1,5 +1,5 @@
 /*!
- * ejDate 1.0.0 alpha
+ * ejDate 1.0.1 alpha
  * https://github.com/stackjie/ejDate.js
  * @license MIT licensed
  *
