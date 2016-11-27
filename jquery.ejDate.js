@@ -60,10 +60,13 @@
                         <tbody></tbody></table>'
                 );
 
-                that.append(elems.mainElem);
+                // 将text表单用div元素包裹，以便使组件绝对定位
+                that.wrap('<div class="ejdate-wrap">');
+
+                that.after(elems.mainElem);
 
                 // 获取将要操作的dom元素
-                elems.targetInput = elems.mainElem.prev();
+                elems.targetInput = that;
                 elems.selectYear = elems.mainElem.find('.select-year'),
                 elems.selectMonth = elems.mainElem.find('.select-month'),
                 elems.btnBefore = elems.mainElem.find('.before-date'),
